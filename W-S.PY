@@ -17,12 +17,31 @@ title = soup.title
 # 1.tag
 # 2 navigable string
 # 3 beautifulsoup
-# 4 comment
+# 4 comment(
+markup = "<p><!--this is a comment--></p>"
+soup2 = BeautifulSoup(markup)
+print(type(soup.p.string))
+exit()
 # get all the paragraph from page
 paras = soup.find_all('p')
 print(paras)
 # get all the anchor tags
 anchors = soup.find_all('a')
+all_links = set()
+# get all the links on page
+for link in anchors:
+    if (link != '#'):
+        link = "https://www.amazon.in/" + link.get('href')
+        all_links.add(link)
+        print(link)
+navbarSupportedContent = soup.find(id = 'navbarSupportedContent')
+# for item in navbarSupportedContent.stripped_strings:
+#     print(item)
+# print(navbarSupportedContent.parent)
+for item in navbarSupportedContent.parents:
+    print(item.name)
+print(navbarSupportedContent.next_sibling.next_sibling)
+
 # print(anchors)
 # get first element in html page
 print(soup.find('p')) 
@@ -33,3 +52,6 @@ print(soup('p')['class'])
 print(soup.find_all('p',class_='lead'))
 # get the text from tags
 print(soup.find('p').get_text())
+print(soup.get_text())
+
+
